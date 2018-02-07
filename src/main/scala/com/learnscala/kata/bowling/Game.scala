@@ -15,10 +15,29 @@ class Game {
   }
 
   private def addBonuses(pins: Int): Unit = {
-    val bonuses = currentFrame.bonuses(pins)
 
-    currentFrame.previous.map(_.bonus += bonuses(0))
-    currentFrame.previous.flatMap(_.previous).map(_.bonus += bonuses(1))
+    val bonusForPrevious = previousFrameBonus(pins)
+    val bonusFor2Previous = previous2FrameBonus(pins)
+
+    currentFrame.previous.map(_.bonus += bonusForPrevious)
+    currentFrame.previous.flatMap(_.previous).map(_.bonus += bonusFor2Previous)
+  }
+
+  private def previousFrameBonus(pins: Int): Int = {
+
+    if (currentFrame.previous.exists(_.strike) ||
+      (currentFrame.previous.exists(_.spare) && currentFrame.rolls.lengthCompare(1) == 0)
+    ) pins else 0
+  }
+
+  private def previous2FrameBonus(pins: Int): Int = {
+
+    if (
+      currentFrame.previous.exists(_.strike) &&
+        currentFrame.rolls.lengthCompare(1) == 0 &&
+        currentFrame.previous.flatMap(_.previous).exists(_.strike)
+    ) pins else 0
+
   }
 
   private def addFrame(previous: Frame): Unit = {
@@ -36,6 +55,4 @@ class Game {
   def score(): Int = {
     frames.map(_.score).sum
   }
-
-
 }
