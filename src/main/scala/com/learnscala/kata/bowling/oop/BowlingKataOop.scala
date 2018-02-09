@@ -1,14 +1,14 @@
-package com.learnscala.kata.bowling
+package com.learnscala.kata.bowling.oop
 
 import com.learnscala.kata.KataRunner
 
-class BowlingKata extends KataRunner {
+class BowlingKataOop extends KataRunner {
 
   override def run(): Unit = {
 
     val game = new Game
 
-    println("Started bowling game")
+    println("Started bowling OOP game")
 
     game.roll(8) // 1st frame
     game.roll(2) // 1st frame

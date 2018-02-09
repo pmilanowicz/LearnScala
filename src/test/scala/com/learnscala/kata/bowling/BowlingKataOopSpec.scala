@@ -1,9 +1,10 @@
 package com.learnscala.kata.bowling
 
+import com.learnscala.kata.bowling.oop.Game
 import org.scalatest.{BeforeAndAfterEach, FunSuite, Matchers}
 
 
-class BowlingKataSpec extends FunSuite with Matchers with BeforeAndAfterEach {
+class BowlingKataOopSpec extends FunSuite with Matchers with BeforeAndAfterEach {
 
   var game: Game = _
 
@@ -11,16 +12,23 @@ class BowlingKataSpec extends FunSuite with Matchers with BeforeAndAfterEach {
     game = new Game
   }
 
-
-  test("score should be 0 at the beginning") {
+  test("should score be 0 at the beginning") {
     game.score() should equal(0)
   }
 
-  test("score should be 10 after rolls 2 and 8") {
+  test("should score be 10 after rolls 2 and 8") {
     game.roll(2)
     game.roll(8)
 
     game.score() should equal(10)
+  }
+
+  test("should score be 15 after rolls 1 and 9 (spare) and next roll 5") {
+    game.roll(1)
+    game.roll(9)
+    game.roll(5)
+
+    game.score() should equal(20)
   }
 
   test("should add bonus after first strike and return 30 as score") {

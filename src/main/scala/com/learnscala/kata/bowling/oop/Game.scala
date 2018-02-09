@@ -1,4 +1,4 @@
-package com.learnscala.kata.bowling
+package com.learnscala.kata.bowling.oop
 
 class Game {
 
