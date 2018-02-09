@@ -8,5 +8,6 @@ object Main extends App {
 
   factory.create("bowling").run()
   factory.create("bowling_func").run()
+  factory.create("chop").run()
 
 }
