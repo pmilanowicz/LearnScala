@@ -1,6 +1,6 @@
 package com.learnscala.kata.bowling.oop
 
-class Game {
+class Bowling {
 
   var frames: List[Frame] = List(new Frame(None))
 

@@ -1,6 +1,6 @@
 package com.learnscala.kata.bowling.functional
 
-class BowlingFunctional {
+class BowlingRecursive {
 
   var rolls: List[Int] = List()
 

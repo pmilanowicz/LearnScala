@@ -3,20 +3,23 @@ package com.learnscala.kata.chop
 class Chop {
 
   def chop(searched: Int, array: List[Int]): Int = {
-    chopRecursive(searched, array, 0)
-  }
 
-  def chopRecursive(searched: Int, array: List[Int], leftIndex: Int): Int = {
+    var (left, right) = (0, array.length - 1)
 
-    if (array.lengthCompare(1) < 0) return -1
+    var middle: Int = 0
 
-    val middle = (array.length / 2).ceil.toInt
-    val (left, right) = array.splitAt(middle)
+    while (left <= right) {
+      middle = ((left + right) / 2).floor.toInt
 
-    right.head match {
-      case value if value == searched => middle + leftIndex
-      case value if value < searched => chopRecursive(searched, right.tail, leftIndex + middle + 1)
-      case value if value > searched => chopRecursive(searched, left, leftIndex)
+      array(middle) match {
+        case value if value.compareTo(searched) == 0 => return middle
+        case value if value.compareTo(searched) > 0 => right = middle - 1
+        case value if value.compareTo(searched) < 0 => left = middle + 1
+        case _ => return -1
+      }
+
     }
+
+    - 1
   }
 }

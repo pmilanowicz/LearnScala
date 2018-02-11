@@ -1,70 +1,70 @@
 package com.learnscala.kata.bowling
 
-import com.learnscala.kata.bowling.functional.BowlingFunctional
-import com.learnscala.kata.bowling.oop.Game
+import com.learnscala.kata.bowling.functional.BowlingRecursive
+import com.learnscala.kata.bowling.oop.Bowling
 import org.scalatest.{BeforeAndAfterEach, FunSuite, Matchers}
 
 class BowlingKataSpec extends FunSuite with Matchers with BeforeAndAfterEach {
 
-  var gameOop: Game = _
-  var gameFunc: BowlingFunctional = _
+  var bowling: Bowling = _
+  var bowlingRecursive: BowlingRecursive = _
 
   override def beforeEach(): Unit = {
-    gameOop = new Game
-    gameFunc = new BowlingFunctional
+    bowling = new Bowling
+    bowlingRecursive = new BowlingRecursive
   }
 
   test("should score be 0 at the beginning") {
-    gameFunc.score() should equal(0)
-    gameOop.score() should equal(0)
+    bowlingRecursive.score() should equal(0)
+    bowling.score() should equal(0)
   }
 
   test("should score be 10 after rolls 2 and 8") {
-    gameFunc.roll(2)
-    gameFunc.roll(8)
+    bowlingRecursive.roll(2)
+    bowlingRecursive.roll(8)
 
-    gameFunc.score() should equal(10)
+    bowlingRecursive.score() should equal(10)
 
-    gameOop.roll(2)
-    gameOop.roll(8)
+    bowling.roll(2)
+    bowling.roll(8)
 
-    gameOop.score() should equal(10)
+    bowling.score() should equal(10)
   }
 
   test("should score be 15 after rolls 1 and 9 (spare) and next roll 5") {
-    gameFunc.roll(1)
-    gameFunc.roll(9)
-    gameFunc.roll(5)
+    bowlingRecursive.roll(1)
+    bowlingRecursive.roll(9)
+    bowlingRecursive.roll(5)
 
-    gameFunc.score() should equal(20)
+    bowlingRecursive.score() should equal(20)
 
-    gameOop.roll(1)
-    gameOop.roll(9)
-    gameOop.roll(5)
+    bowling.roll(1)
+    bowling.roll(9)
+    bowling.roll(5)
 
-    gameOop.score() should equal(20)
+    bowling.score() should equal(20)
   }
 
   test("should add bonus after first strike and return 30 as score") {
-    gameFunc.roll(10)
-    gameFunc.roll(5)
-    gameFunc.roll(5)
+    bowlingRecursive.roll(10)
+    bowlingRecursive.roll(5)
+    bowlingRecursive.roll(5)
 
-    gameFunc.score() should equal(30)
+    bowlingRecursive.score() should equal(30)
 
-    gameOop.roll(10)
-    gameOop.roll(5)
-    gameOop.roll(5)
+    bowling.roll(10)
+    bowling.roll(5)
+    bowling.roll(5)
 
-    gameOop.score() should equal(30)
+    bowling.score() should equal(30)
   }
 
 
   test("should correct score perfect game at 300 points") {
 
-    (1 to 12).foreach(_ => {gameFunc.roll(10); gameOop.roll(10)})
+    (1 to 12).foreach(_ => {bowlingRecursive.roll(10); bowling.roll(10)})
 
-    gameFunc.score() should equal(300)
-    gameOop.score() should equal(300)
+    bowlingRecursive.score() should equal(300)
+    bowling.score() should equal(300)
   }
 }
