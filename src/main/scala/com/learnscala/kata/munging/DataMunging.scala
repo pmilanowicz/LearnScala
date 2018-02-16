@@ -21,7 +21,7 @@ class DataMunging {
 
   def fileAsRows(filename: String, filterRows: (List[List[String]]) => List[List[String]]): List[List[String]] = {
     val bufferedFile = Source.fromFile(filename)
-    val fileLines = bufferedFile.getLines().toList.map(_.split("\\W+").toList) //
+    val fileLines = bufferedFile.getLines().toList.map(_.split("\\W+").toList)
 
     bufferedFile.close()
 
